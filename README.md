@@ -1,17 +1,19 @@
 # QUIZZICAL App
 
+## Demo
+
+Check Your IQ Level On Your Fav Subject [Live Demo Click Me](https://classy-tartufo-b586d7.netlify.app/).
+
 ## Table of Contents
 - [QUIZZICAL App](#quizzical-app)
-  - [Table of Contents](#table-of-contents)
   - [Demo](#demo)
+  - [Table of Contents](#table-of-contents)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
   - [Contributing](#contributing)
   - [License](#license)
 
-## Demo
 
-Search Your City  [Live Demo Click Me](https://classy-tartufo-b586d7.netlify.app/).
 
 
 ### Prerequisites
