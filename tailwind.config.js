@@ -5,12 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    colors: {
-      'btn-clr': '#4D5B9E',
-      'dark-clr': '#293264',
-      'light-clr': '#F5F7FB',
+    extend: {
+      colors: {
+        'btn-clr': '#4D5B9E',
+        'dark-clr': '#293264',
+        'light-clr': '#F5F7FB',
+      },
     },
-    extend: {},
   },
   plugins: [],
 }
