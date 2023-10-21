@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
 import HomePage from './components/HomePage'
+import QuizPage from './components/QuizPage'
 
 const App = () => {
-  const [start, setStart] = useState(false)
+  const [start, setStart] = useState(true)
   const [options, setOptions] = useState({
     category: '',
     difficulty: '',
@@ -26,6 +27,11 @@ const App = () => {
         options={options}
         handleOptionsChange={handleOptionsChange}
       />}
+      { start &&
+        <QuizPage
+          options={options}
+        />
+      }
     </main>
   )
 }

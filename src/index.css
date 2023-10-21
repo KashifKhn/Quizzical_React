@@ -9,6 +9,11 @@
     body {
         font-family: 'Karla', sans-serif;
     }
+
+    ul {
+        list-style: revert;
+        list-style-type: revert;
+    }
 }
 
 .main {
