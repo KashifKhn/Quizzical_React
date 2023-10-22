@@ -11,12 +11,6 @@ export default {
         'select-clr': '#D6DBF5',
         'dark-clr': '#293264',
         'light-clr': '#F5F7FB',
-      },
-      listStyleType: {
-        'roman': 'upper-roman',
-      },
-      listStyle: {
-        'roman': 'upper-roman',
       }
     },
   },
