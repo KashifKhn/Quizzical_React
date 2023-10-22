@@ -8,17 +8,17 @@ export default {
     extend: {
       colors: {
         'btn-clr': '#4D5B9E',
+        'select-clr': '#D6DBF5',
         'dark-clr': '#293264',
         'light-clr': '#F5F7FB',
       },
       listStyleType: {
-        roman: 'upper-roman',
+        'roman': 'upper-roman',
       },
       listStyle: {
-        roman: 'upper-roman',
+        'roman': 'upper-roman',
       }
     },
   },
   plugins: [],
 }
-

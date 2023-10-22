@@ -1,8 +1,7 @@
 import React from 'react'
-import { useState } from 'react'
 
 const HomePage = (props) => {
-  const {handleStart, options, handleOptionsChange } = props
+  const { handleStart, options, handleOptionsChange } = props
 
 
   function handleSubmit(e) {
@@ -23,13 +22,13 @@ const HomePage = (props) => {
           onChange={handleOptionsChange}
         >
           <option value="">Any</option>
-          <option value="General Knowledge">General Knowledge</option>
-          <option value="Sport">Sport</option>
-          <option value="History">History</option>
-          <option value="Science">Science</option>
-          <option value="Geography">Geography</option>
-          <option value="Music">Music</option>
-          <option value="Film">Film</option>
+          <option value="9">General Knowledge</option>
+          <option value="10">Sport</option>
+          <option value="11">History</option>
+          <option value="12">Science</option>
+          <option value="13">Geography</option>
+          <option value="14">Music</option>
+          <option value="15">Film</option>
         </select>
         <label htmlFor='difficulty' className='text-[1rem] font-semibold py-2 text-dark-clr'>Difficulty:</label>
         <select className='bg-stone-100 px-4 py-2 rounded-md border-2 border-dark-clr w-full'
@@ -39,9 +38,9 @@ const HomePage = (props) => {
           onChange={handleOptionsChange}
         >
           <option value="">Any</option>
-          <option value="Easy">Easy</option>
-          <option value="Medium">Medium</option>
-          <option value="Hard">Hard</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
         </select>
         <label htmlFor='type' className='text-[1rem] font-semibold py-2 text-dark-clr'>Type:</label>
         <select className='bg-stone-100 px-4 py-2 rounded-md border-2 border-dark-clr w-full'
@@ -51,8 +50,8 @@ const HomePage = (props) => {
           onChange={handleOptionsChange}
         >
           <option value="">Any</option>
-          <option value="Multiple Choice">Multiple Choice</option>
-          <option value="True / False">True / False</option>
+          <option value="multiple">Multiple Choice</option>
+          <option value="boolean">True / False</option>
         </select>
         <label htmlFor='amount' className='text-[1rem] font-semibold py-2 text-dark-clr'>Questions:</label>
         <select className='bg-stone-100 px-4 py-2 rounded-md border-2 border-dark-clr w-full'
@@ -68,14 +67,14 @@ const HomePage = (props) => {
           <option value="40">40</option>
           <option value="50">40</option>
         </select>
-        <button
-          type='submit'
-          className='bg-dark-clr text-light-clr w-full px-4 py-2 rounded-md mt-4'
-          onClick={handleStart}
-
-        >
-          Submit</button>
       </form>
+      <button
+        type='submit'
+        className='bg-dark-clr text-light-clr w-full px-4 py-2 rounded-md mt-4'
+        onClick={handleStart}
+
+      >
+        Submit</button>
     </div>
   )
 }
