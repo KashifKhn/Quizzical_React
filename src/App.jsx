@@ -5,7 +5,7 @@ import QuizPage from './pages/QuizPage'
 
 const App = () => {
   const [start, setStart] = useState(true)
-  const [options, setOptions] = useState({
+  const [query, setQuery] = useState({
     category: '',
     difficulty: '',
     type: '',
@@ -15,8 +15,7 @@ const App = () => {
   const handleStart = () => setStart(true);
 
   const handleOptionsChange = (e) => {
-    console.log(e.target.name , " = ",e.target.value)
-    setOptions({ ...options, [e.target.name]: e.target.value })
+    setQuery({ ...query, [e.target.name]: e.target.value })
   }
 
   return (
@@ -24,12 +23,12 @@ const App = () => {
      { !start &&
       <HomePage
         handleStart={handleStart}
-        options={options}
+        query={query}
         handleOptionsChange={handleOptionsChange}
       />}
       { start &&
         <QuizPage
-          options={options}
+          query={query}
         />
       }
     </main>

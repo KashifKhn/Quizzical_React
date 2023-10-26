@@ -1,24 +1,36 @@
-import React, { useState } from 'react'
-import OptButton from './OptButton'
+import React, { useEffect, useState } from 'react';
+
+const QuizQuestion = (props) => {
+    const { question, questionNo, updateSelectAnswer, questionId } = props;
 
 
-const QuizQuestion = ({ question, index }) => {
-
-    function decodeString(str) {
-        const textArea = document.createElement('textarea')
-        textArea.innerHTML = str
-        return textArea.value
+    const decodeString = (str) => {
+        const textArea = document.createElement('textarea');
+        textArea.innerHTML = str;
+        return textArea.value;
     }
+
     return (
         <li key={question.id} className='text-dark-clr flex flex-col gap-2 items-start justify-start border-b-[1px] py-2 w-full border-dark-clr'>
-            <p className='text-[1rem] font-semibold'> <span className='text-[14px] font-semibold space-x-1'  >Q {index + 1} : </span > {decodeString(question.question)}</p>
+            <p className='text-[1rem] font-semibold'>
+                <span className='text-[14px] font-semibold space-x-1'>Q {questionNo + 1} :</span>
+                {decodeString(question.question)}
+            </p>
             <div className='flex justify-around w-full'>
                 {
-                    question.options.map(option => <OptButton key={option} id={option} option={option} />)
+                    question.options.map((option, index) => (
+                        <button
+                            key={option}
+                            className={`text-[10px] font-[500] border-dark-clr border-[1px] px-3 py-1 rounded-lg 
+                            ${option === question.selectAnswer ? "bg-select-clr" : ""}
+                            `}
+                            onClick={() => updateSelectAnswer(questionId, option)}
+                        >{option}</button>
+                    ))
                 }
             </div>
         </li>
-    )
+    );
 }
 
-export default QuizQuestion
+export default QuizQuestion;

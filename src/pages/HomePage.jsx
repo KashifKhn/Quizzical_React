@@ -1,12 +1,11 @@
 import React from 'react'
 
 const HomePage = (props) => {
-  const { handleStart, options, handleOptionsChange } = props
+  const { handleStart, options: query, handleOptionsChange } = props
 
 
   function handleSubmit(e) {
     e.preventDefault()
-    console.log('submitted')
   }
 
   return (
@@ -18,7 +17,7 @@ const HomePage = (props) => {
           className='bg-stone-100 px-4 py-2 rounded-md border-2 border-dark-clr w-full'
           name="category"
           id="category"
-          value={options.category}
+          value={query.category}
           onChange={handleOptionsChange}
         >
           <option value="">Any</option>
@@ -34,7 +33,7 @@ const HomePage = (props) => {
         <select className='bg-stone-100 px-4 py-2 rounded-md border-2 border-dark-clr w-full'
           name="difficulty"
           id="difficulty"
-          value={options.difficulty}
+          value={query.difficulty}
           onChange={handleOptionsChange}
         >
           <option value="">Any</option>
@@ -46,7 +45,7 @@ const HomePage = (props) => {
         <select className='bg-stone-100 px-4 py-2 rounded-md border-2 border-dark-clr w-full'
           name="type"
           id="type"
-          value={options.type}
+          value={query.type}
           onChange={handleOptionsChange}
         >
           <option value="">Any</option>
@@ -57,7 +56,7 @@ const HomePage = (props) => {
         <select className='bg-stone-100 px-4 py-2 rounded-md border-2 border-dark-clr w-full'
           name="amount"
           id="amount"
-          value={options.amount}
+          value={query.amount}
           onChange={handleOptionsChange}
         >
           <option value="5">05</option>
