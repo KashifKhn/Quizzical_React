@@ -11,6 +11,9 @@ export default {
         'select-clr': '#D6DBF5',
         'dark-clr': '#293264',
         'light-clr': '#F5F7FB',
+        'correct-clr': '#94D7A2',
+        'inCorrect-clr': '#F8BCBC'
+
       }
     },
   },

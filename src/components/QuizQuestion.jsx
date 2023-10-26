@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const QuizQuestion = (props) => {
-    const { question, questionNo, updateSelectAnswer, questionId } = props;
+    const { question, questionNo, updateSelectAnswer, questionId, isEnd } = props;
 
 
     const decodeString = (str) => {
@@ -21,11 +21,16 @@ const QuizQuestion = (props) => {
                     question.options.map((option, index) => (
                         <button
                             key={option}
-                            className={`text-[10px] font-[500] border-dark-clr border-[1px] px-3 py-1 rounded-lg 
+                            className={`text-[10px] font-[500] border-dark-clr border-[1px] px-3 py-1 rounded-lg
                             ${option === question.selectAnswer ? "bg-select-clr" : ""}
+                            ${option === question.correctAnswer && isEnd ? "bg-correct-clr" : ""}
+                            ${option === question.selectAnswer && option !== question.correctAnswer && isEnd ? "bg-inCorrect-clr" : ""}
                             `}
                             onClick={() => updateSelectAnswer(questionId, option)}
-                        >{option}</button>
+                            disabled={isEnd}
+                        >
+                            {decodeString(option)}
+                        </button>
                     ))
                 }
             </div>

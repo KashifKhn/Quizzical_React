@@ -6,6 +6,7 @@ const QuizPage = (props) => {
     const { query } = props
     const [questions, setQuestions] = useState([])
     const [selectQuestion, setSelectQuestion] = useState([])
+    const [isEnd, setIsEnd] = useState(false)
     const [score, setScore] = useState(0)
 
     useEffect(() => {
@@ -24,14 +25,13 @@ const QuizPage = (props) => {
                     questionId: question.id,
                     question: question.question,
                     options: question.options,
-                    correctAnswer: question.correctAnswer,
+                    correctAnswer: question.answers,
                     selectAnswer: ""
                 }))
             )
         }
         fetchApi()
     }, [])
-
     function updateSelectAnswer(questionId, selectAnswer) {
         const newSelectQuestion = selectQuestion.map((question) => {
             if (question.questionId === questionId) {
@@ -41,7 +41,30 @@ const QuizPage = (props) => {
         })
         setSelectQuestion(newSelectQuestion)
     }
+
+    function allAnswerSelected() {
+        let allSelected = true
+        selectQuestion.forEach((question) => {
+            if (question.selectAnswer === "") {
+                allSelected = false
+            }
+        })
+        return allSelected
+    }
+
+
+    function checkAnswer() {
+        if(!allAnswerSelected()) return
+        console.log("checkAnswer")
+        setIsEnd(true)
+        selectQuestion.forEach((question) => {
+            if (question.selectAnswer === question.correctAnswer) {
+                setScore(oldScore => oldScore + 1)
+            }
+        })
+    }
     console.log(selectQuestion)
+
     const quizElements = selectQuestion.map((question, index) =>
         <QuizQuestion
             key={question.questionId}
@@ -50,6 +73,8 @@ const QuizPage = (props) => {
             questionNo={index}
             selectAnswer={question.selectAnswer}
             updateSelectAnswer={updateSelectAnswer}
+            isEnd={isEnd}
+            setIsEnd={setIsEnd}
         />
     )
 
@@ -62,8 +87,9 @@ const QuizPage = (props) => {
             <button
                 type='submit'
                 className='bg-dark-clr text-light-clr w-full px-4 py-2 rounded-md mt-4'
+                onClick={checkAnswer}
             >
-                {"Submit"}
+                Submit
             </button>
         </div>
     )
