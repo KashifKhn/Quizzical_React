@@ -3,11 +3,9 @@ import { fetchQuizQuestions } from '../api'
 import QuizQuestion from '../components/QuizQuestion'
 
 const QuizPage = (props) => {
-    const { query } = props
+    const { query, isEnd, setIsEnd, setScore } = props
     const [questions, setQuestions] = useState([])
     const [selectQuestion, setSelectQuestion] = useState([])
-    const [isEnd, setIsEnd] = useState(false)
-    const [score, setScore] = useState(0)
 
     useEffect(() => {
         const fetchApi = async () => {
@@ -81,16 +79,17 @@ const QuizPage = (props) => {
     if (questions.length === 0) return <div className='text-[1rem] text-dark-clr font-semibold'>Loading...</div>
     return (
         <div className="flex flex-col items-center justify-center">
-            <ul className='list-roman max-sm:w-full  max-w-[550px] w-full flex flex-col text-left items-start justify-start gap-5'>
+            <ul className='list-roman max-sm:w-full mb-12  max-w-[550px] w-full flex flex-col text-left items-start justify-start gap-5'>
                 {quizElements}
             </ul>
-            <button
-                type='submit'
+            {
+                !isEnd && <button
+                type='button'
                 className='bg-dark-clr text-light-clr w-full px-4 py-2 rounded-md mt-4'
                 onClick={checkAnswer}
             >
                 Submit
-            </button>
+            </button>}
         </div>
     )
 }

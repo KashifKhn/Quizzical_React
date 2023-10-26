@@ -16,15 +16,16 @@ const QuizQuestion = (props) => {
                 <span className='text-[14px] font-semibold space-x-1'>Q {questionNo + 1} :</span>
                 {decodeString(question.question)}
             </p>
-            <div className='flex justify-around w-full'>
+            <div className='flex justify-around w-full flex-wrap gap-4 '>
                 {
                     question.options.map((option, index) => (
                         <button
                             key={option}
                             className={`text-[10px] font-[500] border-dark-clr border-[1px] px-3 py-1 rounded-lg
-                            ${option === question.selectAnswer ? "bg-select-clr" : ""}
+                            ${option === question.selectAnswer && !isEnd ? "bg-select-clr" : ""}
                             ${option === question.correctAnswer && isEnd ? "bg-correct-clr" : ""}
                             ${option === question.selectAnswer && option !== question.correctAnswer && isEnd ? "bg-inCorrect-clr" : ""}
+                            
                             `}
                             onClick={() => updateSelectAnswer(questionId, option)}
                             disabled={isEnd}

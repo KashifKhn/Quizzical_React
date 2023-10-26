@@ -1,12 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { fetchCategories } from '../api'
+
 
 const HomePage = (props) => {
-  const { handleStart, options: query, handleOptionsChange } = props
+  const { handleStart,query, handleOptionsChange } = props
+  const [categories, setCategories] = useState([])
 
 
   function handleSubmit(e) {
     e.preventDefault()
   }
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      const categories = await fetchCategories()
+      setCategories(categories)
+    }
+    fetchApi()
+  }, [])
+  console.log(categories)
+
+  const categoriesElement = categories.map((category) => (
+    <option value={category.id} key={category.id}>{category.name}</option>
+  ))
+
 
   return (
     <div className='flex flex-col items-center justify-center w-[250px]'>
@@ -21,13 +38,7 @@ const HomePage = (props) => {
           onChange={handleOptionsChange}
         >
           <option value="">Any</option>
-          <option value="9">General Knowledge</option>
-          <option value="10">Sport</option>
-          <option value="11">History</option>
-          <option value="12">Science</option>
-          <option value="13">Geography</option>
-          <option value="14">Music</option>
-          <option value="15">Film</option>
+          {categoriesElement}
         </select>
         <label htmlFor='difficulty' className='text-[1rem] font-semibold py-2 text-dark-clr'>Difficulty:</label>
         <select className='bg-stone-100 px-4 py-2 rounded-md border-2 border-dark-clr w-full'
