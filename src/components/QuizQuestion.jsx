@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { nanoid } from 'nanoid';
 
 const QuizQuestion = (props) => {
     const { question, questionNo, updateSelectAnswer, questionId, isEnd } = props;
-
 
     const decodeString = (str) => {
         const textArea = document.createElement('textarea');
@@ -18,14 +18,13 @@ const QuizQuestion = (props) => {
             </p>
             <div className='flex justify-around w-full flex-wrap gap-4 '>
                 {
-                    question.options.map((option, index) => (
+                    question.options.map((option) => (
                         <button
-                            key={option}
+                            key={nanoid()}
                             className={`text-[10px] font-[500] border-dark-clr border-[1px] px-3 py-1 rounded-lg
                             ${option === question.selectAnswer && !isEnd ? "bg-select-clr" : ""}
                             ${option === question.correctAnswer && isEnd ? "bg-correct-clr" : ""}
                             ${option === question.selectAnswer && option !== question.correctAnswer && isEnd ? "bg-inCorrect-clr" : ""}
-                            
                             `}
                             onClick={() => updateSelectAnswer(questionId, option)}
                             disabled={isEnd}

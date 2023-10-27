@@ -75,7 +75,7 @@ const HomePage = (props) => {
           <option value="20">20</option>
           <option value="30">30</option>
           <option value="40">40</option>
-          <option value="50">40</option>
+          <option value="50">50</option>
         </select>
       </form>
       <button

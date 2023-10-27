@@ -3,34 +3,25 @@
 import { nanoid } from 'nanoid'
 
 const BASE_URL = 'https://opentdb.com/api.php?';
-export const fetchQuizQuestions = async (query) => {
-    let response;
-    if (query.type === "" && query.category === "" && query.difficulty === "") {
-        response = await fetch(`${BASE_URL}amount=${query.amount}`);
-    }
-    else if (query.type === "" && query.category === "") {
-        response = await fetch(`${BASE_URL}amount=${query.amount}&difficulty=${query.difficulty}`);
-    }
-    else if (query.type === "" && query.difficulty === "") {
-        response = await fetch(`${BASE_URL}amount=${query.amount}&category=${query.category}`);
-    }
-    else if (query.category === "" && query.difficulty === "") {
-        response = await fetch(`${BASE_URL}amount=${query.amount}&type=${query.type}`);
-    }
-    else if (query.type === "") {
-        response = await fetch(`${BASE_URL}amount=${query.amount}&category=${query.category}&difficulty=${query.difficulty}`);
-    }
-    else if (query.category === "") {
-        response = await fetch(`${BASE_URL}amount=${query.amount}&type=${query.type}&difficulty=${query.difficulty}`);
-    }
-    else if (query.difficulty === "") {
-        response = await fetch(`${BASE_URL}amount=${query.amount}&type=${query.type}&category=${query.category}`);
-    }
-    else {
-        response = await fetch(`${BASE_URL}amount=${query.amount}&type=${query.type}&category=${query.category}&difficulty=${query.difficulty}`);
-    }
 
+export const fetchQuizQuestions = async (query) => {
+    const queryParams = [];
+    if (query.type !== "")
+        queryParams.push(`type=${query.type}`);
+
+    if (query.category !== "")
+        queryParams.push(`category=${query.category}`);
+
+    if (query.difficulty !== "")
+        queryParams.push(`difficulty=${query.difficulty}`);
+
+    if (query.amount)
+        queryParams.push(`amount=${query.amount}`);
+
+    const url = `${BASE_URL}${queryParams.join('&')}`;
+    const response = await fetch(url);
     const data = await response.json();
+
     return data.results.map((item) => ({
         id: nanoid(),
         question: item.question,
