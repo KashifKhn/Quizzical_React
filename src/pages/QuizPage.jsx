@@ -4,7 +4,6 @@ import QuizQuestion from '../components/QuizQuestion'
 
 const QuizPage = (props) => {
     const { query, isEnd, setIsEnd, setScore } = props
-    const [questions, setQuestions] = useState([])
     const [selectQuestion, setSelectQuestion] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
@@ -21,7 +20,6 @@ const QuizPage = (props) => {
                         category: query.category
                     }
                 )
-                setQuestions(questions)
                 setSelectQuestion(
                     questions.map((question) => ({
                         questionId: question.id,
@@ -41,6 +39,7 @@ const QuizPage = (props) => {
         }
         fetchApi()
     }, [])
+
     function updateSelectAnswer(questionId, selectAnswer) {
         const newSelectQuestion = selectQuestion.map((question) => {
             if (question.questionId === questionId) {
@@ -61,10 +60,8 @@ const QuizPage = (props) => {
         return allSelected
     }
 
-
     function checkAnswer() {
         if (!allAnswerSelected()) return
-        console.log("checkAnswer")
         setIsEnd(true)
         selectQuestion.forEach((question) => {
             if (question.selectAnswer === question.correctAnswer) {
@@ -72,7 +69,6 @@ const QuizPage = (props) => {
             }
         })
     }
-    console.log(selectQuestion)
 
     const quizElements = selectQuestion.map((question, index) =>
         <QuizQuestion
