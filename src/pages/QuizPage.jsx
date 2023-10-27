@@ -90,14 +90,14 @@ const QuizPage = (props) => {
     if (loading) return <p className='text-lg'>Loading...</p>
     if (error) return <p className='text-lg'>{error.message} <br/>!Please Reload!</p>
     return (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center w-full">
             <ul className='list-roman max-sm:w-full mb-12  max-w-[550px] w-full flex flex-col text-left items-start justify-start gap-5'>
                 {quizElements}
             </ul>
             {
                 !isEnd && <button
                     type='button'
-                    className='bg-dark-clr text-light-clr w-full px-4 py-2 rounded-md mt-4'
+                    className='bg-dark-clr text-light-clr px-8 py-2 rounded-md mt-4'
                     onClick={checkAnswer}
                 >
                     Submit
