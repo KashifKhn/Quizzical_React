@@ -6,27 +6,38 @@ const QuizPage = (props) => {
     const { query, isEnd, setIsEnd, setScore } = props
     const [questions, setQuestions] = useState([])
     const [selectQuestion, setSelectQuestion] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         const fetchApi = async () => {
-            const questions = await fetchQuizQuestions(
-                {
-                    amount: query.amount,
-                    difficulty: query.difficulty,
-                    type: query.type,
-                    category: query.category
-                }
-            )
-            setQuestions(questions)
-            setSelectQuestion(
-                questions.map((question) => ({
-                    questionId: question.id,
-                    question: question.question,
-                    options: question.options,
-                    correctAnswer: question.answers,
-                    selectAnswer: ""
-                }))
-            )
+            setLoading(true)
+            try {
+                const questions = await fetchQuizQuestions(
+                    {
+                        amount: query.amount,
+                        difficulty: query.difficulty,
+                        type: query.type,
+                        category: query.category
+                    }
+                )
+                setQuestions(questions)
+                setSelectQuestion(
+                    questions.map((question) => ({
+                        questionId: question.id,
+                        question: question.question,
+                        options: question.options,
+                        correctAnswer: question.answers,
+                        selectAnswer: ""
+                    }))
+                )
+            }
+            catch (err) {
+                setError(err)
+            }
+            finally {
+                setLoading(false)
+            }
         }
         fetchApi()
     }, [])
@@ -52,7 +63,7 @@ const QuizPage = (props) => {
 
 
     function checkAnswer() {
-        if(!allAnswerSelected()) return
+        if (!allAnswerSelected()) return
         console.log("checkAnswer")
         setIsEnd(true)
         selectQuestion.forEach((question) => {
@@ -76,7 +87,8 @@ const QuizPage = (props) => {
         />
     )
 
-    if (questions.length === 0) return <div className='text-[1rem] text-dark-clr font-semibold'>Loading...</div>
+    if (loading) return <p className='text-lg'>Loading...</p>
+    if (error) return <p className='text-lg'>{error.message} <br/>!Please Reload!</p>
     return (
         <div className="flex flex-col items-center justify-center">
             <ul className='list-roman max-sm:w-full mb-12  max-w-[550px] w-full flex flex-col text-left items-start justify-start gap-5'>
@@ -84,12 +96,12 @@ const QuizPage = (props) => {
             </ul>
             {
                 !isEnd && <button
-                type='button'
-                className='bg-dark-clr text-light-clr w-full px-4 py-2 rounded-md mt-4'
-                onClick={checkAnswer}
-            >
-                Submit
-            </button>}
+                    type='button'
+                    className='bg-dark-clr text-light-clr w-full px-4 py-2 rounded-md mt-4'
+                    onClick={checkAnswer}
+                >
+                    Submit
+                </button>}
         </div>
     )
 }

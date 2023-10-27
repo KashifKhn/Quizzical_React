@@ -20,8 +20,14 @@ export const fetchQuizQuestions = async (query) => {
 
     const url = `${BASE_URL}${queryParams.join('&')}`;
     const response = await fetch(url);
-    const data = await response.json();
+    if (!response.ok)
+        throw {
+            message: "Failed to fetch data from server of questions",
+            status: res.status,
+            statusText: res.statusText
+        }
 
+    const data = await response.json();
     return data.results.map((item) => ({
         id: nanoid(),
         question: item.question,
@@ -29,11 +35,19 @@ export const fetchQuizQuestions = async (query) => {
         wrongAnswersList: item.incorrect_answers,
         options: [...item.incorrect_answers, item.correct_answer].sort(() => Math.random() - 0.5),
     }));
+
 }
 
 
 export const fetchCategories = async () => {
     const response = await fetch('https://opentdb.com/api_category.php');
+    if (!response.ok)
+        throw {
+            message: "Failed to fetch data from server of categories",
+            status: res.status,
+            statusText: res.statusText
+        }
+
     const data = await response.json();
     return data.trivia_categories;
 }

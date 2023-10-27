@@ -5,6 +5,8 @@ import { fetchCategories } from '../api'
 const HomePage = (props) => {
   const { handleStart,query, handleOptionsChange } = props
   const [categories, setCategories] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
 
   function handleSubmit(e) {
@@ -13,17 +15,28 @@ const HomePage = (props) => {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const categories = await fetchCategories()
-      setCategories(categories)
+      setLoading(true)
+      try{
+        const categories = await fetchCategories()
+        setCategories(categories)
+      }
+      catch(err){
+        setError(err)
+      }
+      finally{
+        setLoading(false)
+      }
+
     }
     fetchApi()
   }, [])
-  console.log(categories)
 
   const categoriesElement = categories.map((category) => (
     <option value={category.id} key={category.id}>{category.name}</option>
   ))
 
+  if(loading) return <p>Loading...</p>
+  if(error) return <p>Something went wrong Please Rel</p>
 
   return (
     <div className='flex flex-col items-center justify-center w-[250px]'>
