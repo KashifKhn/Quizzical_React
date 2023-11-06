@@ -20,6 +20,7 @@ const QuizPage = (props) => {
                         category: query.category
                     }
                 )
+                console.log(questions);
                 setSelectQuestion(
                     questions.map((question) => ({
                         questionId: question.id,

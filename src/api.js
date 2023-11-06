@@ -26,8 +26,14 @@ export const fetchQuizQuestions = async (query) => {
             status: res.status,
             statusText: res.statusText
         }
-
     const data = await response.json();
+    if(data===undefined || data.results===undefined || data.results.length===0)
+        throw {
+            message: "No questions found for given criteria",
+            status: res.status,
+            statusText: res.statusText
+        }
+    console.log(data);
     return data.results.map((item) => ({
         id: nanoid(),
         question: item.question,
